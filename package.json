@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "Dev": "nodemon app.js"
+    "Dev": "nodemon serverapp.js"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "firebase": "^10.1.0",
+    "firebase-admin": "^11.10.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1"
   }

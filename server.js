@@ -20,7 +20,7 @@ app.use('/employee', employeeRouter)
 
 //express app port view engine
 app.set("views engine", "ejs")
-app.set("views")
+// app.set("views")
 
 //middleware
 // app.use((req, res, next,) => {
@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 
 app.get("/add", (req, res) => {
     console.log("Steve lacy some");
-    res.render('add')
+    res.render('employee/add')
 })
 
 // app.get("/", (req, res) => {
@@ -59,66 +59,66 @@ app.listen(3500)
 
 
 
-// const server = http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
 
-//     // res.setHeader('Content-type', 'text/html')
-//     // // res.write("Hello this is my new server ")
-//     // // res.end()
+    // res.setHeader('Content-type', 'text/html')
+    // // res.write("Hello this is my new server ")
+    // // res.end()
 
-//     // //sending our html file
-//     // fs.readFile('./views/index.html', (err, data) => {
+    // //sending our html file
+    // fs.readFile('./views/index.html', (err, data) => {
 
-//     //     if (err) {
-//     //         console.log(err);
-//     //         res.end()
-//     //     } else { 
-//     //         res.write(data)
-//     //         res.end()
-//     //     }
+    //     if (err) {
+    //         console.log(err);
+    //         res.end()
+    //     } else { 
+    //         res.write(data)
+    //         res.end()
+    //     }
 
-//     // })
+    // })
 
-//     let path = './views'
+    let path = './views'
 
-//     switch (req.url) {
-//         case '/'
-//             : path += '/index.html';
-//             res.statusCode = 200
-//             break;
+    switch (req.url) {
+        case '/'
+            : path += '/index.html';
+            res.statusCode = 200
+            break;
 
-//         case '/add'
-//             : path += '/add.html';
-//             res.statusCode = 200
-//             break;
+        case '/add'
+            : path += '/add.html';
+            res.statusCode = 200
+            break;
 
-//         case '/list'
-//             : path += '/add.html';
-//             res.statusCode = 200
-//             break;
+        case '/list'
+            : path += '/add.html';
+            res.statusCode = 200
+            break;
 
-//         default
-//             : path += '/404.html';
-//             res.statusCode = 404
-//             break;
+        default
+            : path += '/404.html';
+            res.statusCode = 404
+            break;
 
-//     }
+    }
 
-//     //sending back to browser
+    //sending back to browser
 
-//     fs.readFile(path, (err, data) => {
-//         if (err) {
-//             console.log(err);
-//             res.end()
-//         } else {
-//             res.write(data)
-//             res.end()
-//         }
-//     })
+    fs.readFile(path, (err, data) => {
+        if (err) {
+            console.log(err);
+            res.end()
+        } else {
+            res.write(data)
+            res.end()
+        }
+    })
 
 
-// })
+})
 
-// const port = 4000;
-// server.listen(port, 'localhost', () => {
-//     console.log(`Listening to this fire port${port}`)
-// })
+const port = 4000;
+server.listen(port, 'localhost', () => {
+    console.log(`Listening to this fire port${port}`)
+})

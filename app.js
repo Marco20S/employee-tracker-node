@@ -1,5 +1,5 @@
 const morgan = require('morgan')
-const http = require('http')
+// const http = require('http')
 
 const express = require("express")
 const app = express()
@@ -20,7 +20,7 @@ app.use('/employee', employeeRouter)
 
 //express app port view engine
 app.set("views engine", "ejs")
-// app.set("views")
+app.set("views")
 
 
 //middleware

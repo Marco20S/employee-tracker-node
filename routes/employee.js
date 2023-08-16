@@ -2,17 +2,18 @@ const express = require('express')
 const router = express.Router()
 
 
+router.use(logger)
 
 router.get("/", (req, res) => {
     // console.log("Steve lacy some");
     // res.send('Employee List')
-    req.render("employee")
+    res.render("employee")
 })
 
 router.get("/add", (req, res) => {
-    // console.log("Steve lacy some");
+   
     // res.send('Employee form')
-    req.render("employee/add")
+    res.render("employee/add",{})
 })
 
 // router.use((req, res) => {
@@ -21,13 +22,12 @@ router.get("/add", (req, res) => {
 //     req.render("employee/add")
 // })
 
-router.post("/", (req, res) => {
+router.post("/list", (req, res) => {
 
     res.send('Create User form')
 
 })
-
-
+ 
 
 //id to get, edit and delete record
 
@@ -57,6 +57,11 @@ router.post("/*", (req, res) => {
     res.statusCode(404).render('404',{title:'404'})
 })
 
+function logger(req,res,next) {
+
+    console.log(req.originalUrl)
+    next()
+}
 
 
 
