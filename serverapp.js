@@ -84,26 +84,59 @@ app.delete('/delete/:id', async (req, res, next) => {
 
 //update record
 
-app.put('/update/:id', async (req, res, next) => {
+// app.put('/update/:id', async (req, res, next) => {
 
+//     const id = req.params.id;
+//     const updateRecord = {
+//         nameSurname: req.body.nameSurname,
+//         idNumber: req.body.idNumber,
+//         email: req.body.email,
+//         phoneNumber: req.body.phoneNumber,
+//         position: req.body.position
+//     }
+
+//     database.collection('employees').doc(id).update(updateRecord).then(() => {
+//         console.log(" Record updated");
+//         res.send(" Record updated")
+//     })
+//         .catch((error) => {
+//             console.error(error);
+//             res.status(500).send("An error occurred");
+//         })
+// })
+
+app.put('/update/:id', async (req, res, next) => {
     const id = req.params.id;
     const updateRecord = {
-        nameSurname: req.body.nameSurname,
-        idNumber: req.body.idNumber,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        position: req.body.position
+      nameSurname: req.body.nameSurname,
+      idNumber: req.body.idNumber,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      position: req.body.position
     }
-
-    database.collection('employees').doc(id).update(updateRecord).then(() => {
-        console.log(" Record updated");
-        res.send(" Record updated")
-    })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send("An error occurred");
-        })
-})
+  
+    // Validate the required fields
+    if (
+      !updateRecord.nameSurname || '',
+      !updateRecord.idNumber || '',
+      !updateRecord.email || '',
+      !updateRecord.phoneNumber || '',
+      !updateRecord.position || ''
+    ) {
+      res.status(400).send("Missing required fields");
+      return;
+    }
+  
+    // Update the Firestore document
+    try {
+      await database.collection('employees').doc(id).update(updateRecord);
+      console.log("Record updated");
+      res.send("Record updated");
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred");
+    }
+  });
 
 
 
