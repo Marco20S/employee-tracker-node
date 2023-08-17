@@ -52,10 +52,10 @@ router.param("id", (req, res, next, id) => {
     next()
 })
 
-router.post("/*", (req, res) => {
+// router.post("/*", (req, res) => {
 
-    res.statusCode(404).render('404',{title:'404'})
-})
+//     res.statusCode(404).render('404',{title:'404'})
+// })
 
 function logger(req,res,next) {
 

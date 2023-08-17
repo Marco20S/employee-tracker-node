@@ -11,42 +11,82 @@ const credentials = require('./key.json')
 
 //initializing admin
 admin.initializeApp({
-    credentials:admin.credential.cert(credentials)
+    credential: admin.credential.cert(credentials)
 })
 
 //database 
-const databse = admin.firestore()
+const database = admin.firestore()
 app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+app.use(express.urlencoded({ extended: true }))
 
 
 // create post
 
-app.post('/create', async (req,res,next)=>{
+app.post('/create', async (req, res, next) => {
     try {
-        const employeeJson={
-            nameSurname:req.body.title,
-            idNumber:req.body.idNumber,
-            email:req.body.email,
-            phoneNumber:req.body.phoneNumber,
-            postion:req.body.position
-           // image:req.body.title
+        const employeeJson = {
+            nameSurname: req.body.nameSurname,
+            idNumber: req.body.idNumber,
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber,
+            position: req.body.position
         }
 
-        const response = await database.collection('employee').add(employeeJson)
-        res.send(response)
-    }
-    catch (error){
-        console.error("something went wrong");
-        res.alert(error,"An Error Has Occured, Something went wrong")
-        res.send(error)
+        console.log('before awee');
+        const response = await database.collection("employees").add(employeeJson);
+        console.log('after awee');
+        console.log('awee', response);
 
+        res.send(response);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
     }
 })
+
+//read data
+
+app.get('/list', async (req, res, next) => {
+    try {
+        const employeeRef = database.collection('employees')
+
+        const response = await employeeRef.get()
+        let responseArray = []
+
+        response.forEach((result) => {
+            responseArray.push({ ...result.data(), id: result.id })
+        })
+
+        res.status(200).send(responseArray);
+
+        // res.send(response);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
+
+})
+
+
+//delete record
+
+app.delete('/delete/:id', async (req, res, next) => {
+    try {
+        const response = database.collection('employees').doc(req.params.id).delete()
+        console.log("employee is deleted");
+        res.status(200).send("employee is deleted");
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
+})
+
+
+
 
 const employeeRouter = require('./routes/employee')
 
 app.use('/employee', employeeRouter)
- 
- 
+
 app.listen(3000)
