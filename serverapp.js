@@ -85,6 +85,8 @@ app.delete('/delete/:id', async (req, res, next) => {
 //update record
 
 app.put('/update/:id', async (req, res, next) => {
+
+    const id = req.params.id;
     const updateRecord = {
         nameSurname: req.body.nameSurname,
         idNumber: req.body.idNumber,
