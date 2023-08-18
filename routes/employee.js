@@ -23,8 +23,14 @@ router.get("/add", (req, res) => {
 // })
 
 router.post("/list", (req, res) => {
+    res.render("employee/list",{})
+    // res.send('Create User form')
 
-    res.send('Create User form')
+})
+
+router.get("/list", (req, res) => {
+    res.render("employee/list",{})
+    // res.send('Create User form')
 
 })
  

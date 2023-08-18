@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // create post
 
-app.post('/create', async (req, res, next) => {
+app.post('/add', async (req, res, next) => {
     try {
         const employeeJson = {
             nameSurname: req.body.nameSurname,
@@ -86,7 +86,7 @@ app.delete('/delete/:id', async (req, res, next) => {
 
 // app.put('/update/:id', async (req, res, next) => {
 
-//     const id = req.params.id;
+//     const id = req.params.id; 
 //     const updateRecord = {
 //         nameSurname: req.body.nameSurname,
 //         idNumber: req.body.idNumber,
@@ -137,8 +137,6 @@ app.put('/update/:id', async (req, res, next) => {
       res.status(500).send("An error occurred");
     }
   });
-
-
 
 
 const employeeRouter = require('./routes/employee')

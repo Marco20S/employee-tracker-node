@@ -3,9 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css" />
     <title>List</title>
 </head>
 <body>
+
+    <nav>
+        
+        <ul>
+    
+            <li>
+                <a href="/">Home</a>
+            </li>
+    
+            <li>
+                <a href="/employee/add">Add</a>
+            </li>
+    
+            <li>
+                <a href="/employee/list">Employee list</a>
+            </li>
+    
+        </ul>
+    
+    </nav>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+
     <h1>Employee List</h1>
+
+
+
+    <div class="container">
+        <h2>Responsive Tables Using LI <small>Triggers on 767px</small></h2>
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1">Empolyee Id</div>
+            <div class="col col-2">Name And Surname</div>
+            <div class="col col-3">Email</div>
+            <div class="col col-4">Employee Address</div>
+            <div class="col col-5">Phone Number</div>
+            <div class="col col-6">Image</div>
+            <div class="col col-7">Operations</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Job Id">42235</div>
+            <div class="col col-2" data-label="Customer Name">John Doe</div>
+            <div class="col col-3" data-label="Amount">$350</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Payment Status">Pending</div>
+            <div class="col col-6" data-label="Payment Status">Pending</div>
+            <div class="col col-7" data-label="Payment Status">Pending</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Job Id">42442</div>
+            <div class="col col-2" data-label="Customer Name">Jennifer Smith</div>
+            <div class="col col-3" data-label="Amount">$220</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Payment Status">Pending</div>
+            <div class="col col-6" data-label="Payment Status">Pending</div>
+            <div class="col col-7" data-label="Payment Status">Pending</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Job Id">42257</div>
+            <div class="col col-2" data-label="Customer Name">John Smith</div>
+            <div class="col col-3" data-label="Amount">$341</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Payment Status">Pending</div>
+            <div class="col col-6" data-label="Payment Status">Pending</div>
+            <div class="col col-7" data-label="Payment Status">Pending</div>
+          </li>
+          <li class="table-row">
+            <div class="col col-1" data-label="Job Id">42311</div>
+            <div class="col col-2" data-label="Customer Name">John Carpenter</div>
+            <div class="col col-3" data-label="Amount">$115</div>
+            <div class="col col-4" data-label="Payment Status">Pending</div>
+            <div class="col col-5" data-label="Payment Status">Pending</div>
+            <div class="col col-6" data-label="Payment Status">Pending</div>
+            <div class="col col-7" data-label="Payment Status">Pending</div>
+          </li>
+        </ul>
+      </div>
 </body>
 </html>
