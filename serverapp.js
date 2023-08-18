@@ -5,6 +5,10 @@ app.use(express.static('public'))
 app.set("view engine", "ejs")
 app.set("views")
 
+const employeeRouter = require('./routes/employee')
+
+app.use('/employee', employeeRouter)
+
 
 const admin = require('firebase-admin')
 const credentials = require('./key.json')
@@ -46,6 +50,26 @@ app.post('/add', async (req, res, next) => {
 
 //read data
 
+app.get('/', async (req, res, next) => {
+    try {
+        const employeeRef = database.collection('employees')
+
+        const response = await employeeRef.get()
+        let responseArray = []
+
+        response.forEach((result) => {
+            responseArray.push({ ...result.data(), id: result.id })
+        })
+
+        res.render('index',responseArray)
+        // res.send(response);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
+
+})
+
 app.get('/list', async (req, res, next) => {
     try {
         const employeeRef = database.collection('employees')
@@ -57,8 +81,7 @@ app.get('/list', async (req, res, next) => {
             responseArray.push({ ...result.data(), id: result.id })
         })
 
-        res.status(200).send(responseArray);
-
+        res.render('index',{title:'home',responseArray})
         // res.send(response);
     } catch (error) {
         console.error(error);
@@ -138,9 +161,5 @@ app.put('/update/:id', async (req, res, next) => {
     }
   });
 
-
-const employeeRouter = require('./routes/employee')
-
-app.use('/employee', employeeRouter)
 
 app.listen(3000)
