@@ -24,9 +24,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
-// create post
+// create new employee record
 
-app.post('/add', async (req, res, next) => {
+app.post('/addnew', async (req, res, next) => {
     try {
         const employeeJson = {
             nameSurname: req.body.nameSurname,
@@ -34,6 +34,7 @@ app.post('/add', async (req, res, next) => {
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
             position: req.body.position
+
         }
 
         console.log('before awee');
@@ -41,12 +42,15 @@ app.post('/add', async (req, res, next) => {
         console.log('after awee');
         console.log('awee', response);
 
-        res.send(response);
+
+        res.redirect('/');
     } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred");
     }
 })
+
+
 
 //read data
 
@@ -55,22 +59,63 @@ app.get('/', async (req, res, next) => {
         const employeeRef = database.collection('employees')
 
         const response = await employeeRef.get()
-        let responseArray = []
+        let responseArray = [] // Declare and initialize the responseArray
 
         response.forEach((result) => {
             responseArray.push({ ...result.data(), id: result.id })
         })
 
-        res.render('index',responseArray)
-        // res.send(response);
+        console.log(responseArray);
+
+        res.render('index', { title:"List of employees", responseArray }) // Pass responseArray as an object to the render function
     } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred");
     }
-
 })
 
+// app.get('/list', async (req, res, next) => {
+//     try {
+//         const employeeRef = database.collection('employees')
+
+//         const response = await employeeRef.get()
+//         let responseArray = [] // Declare and initialize the responseArray
+
+//         response.forEach((result) => {
+//             responseArray.push({ ...result.data(), id: result.id })
+//         })
+
+//         console.log(responseArray);
+
+//         res.render('list', { title:"List of employees", responseArray }) // Pass responseArray as an object to the render function
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send("An error occurred");
+//     }
+// })
+
 app.get('/list', async (req, res, next) => {
+    try {
+        const employeeRef = database.collection('employees')
+
+        const response = await employeeRef.get()
+        let responseArray = [] // Declare and initialize the responseArray
+
+        response.forEach((result) => {
+            responseArray.push({ ...result.data(), id: result.id })
+        })
+
+        console.log(responseArray);
+
+        res.render('list', { title:"List of employees", responseArray }) // Pass responseArray as an object to the render function
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred");
+    }
+})
+
+//adding new 
+app.get('employee/add', async (req, res, next) => {
     try {
         const employeeRef = database.collection('employees')
 
@@ -81,7 +126,7 @@ app.get('/list', async (req, res, next) => {
             responseArray.push({ ...result.data(), id: result.id })
         })
 
-        res.render('index',{title:'home',responseArray})
+        res.render('index', { title: 'home', responseArray })
         // res.send(response);
     } catch (error) {
         console.error(error);
@@ -89,7 +134,6 @@ app.get('/list', async (req, res, next) => {
     }
 
 })
-
 
 //delete record
 
@@ -131,35 +175,35 @@ app.delete('/delete/:id', async (req, res, next) => {
 app.put('/update/:id', async (req, res, next) => {
     const id = req.params.id;
     const updateRecord = {
-      nameSurname: req.body.nameSurname,
-      idNumber: req.body.idNumber,
-      email: req.body.email,
-      phoneNumber: req.body.phoneNumber,
-      position: req.body.position
+        nameSurname: req.body.nameSurname,
+        idNumber: req.body.idNumber,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        position: req.body.position
     }
-  
+
     // Validate the required fields
     if (
-      !updateRecord.nameSurname || '',
-      !updateRecord.idNumber || '',
-      !updateRecord.email || '',
-      !updateRecord.phoneNumber || '',
-      !updateRecord.position || ''
+        !updateRecord.nameSurname || '',
+        !updateRecord.idNumber || '',
+        !updateRecord.email || '',
+        !updateRecord.phoneNumber || '',
+        !updateRecord.position || ''
     ) {
-      res.status(400).send("Missing required fields");
-      return;
+        res.status(400).send("Missing required fields");
+        return;
     }
-  
+
     // Update the Firestore document
     try {
-      await database.collection('employees').doc(id).update(updateRecord);
-      console.log("Record updated");
-      res.send("Record updated");
+        await database.collection('employees').doc(id).update(updateRecord);
+        console.log("Record updated");
+        res.send("Record updated");
     } catch (error) {
-      console.error(error);
-      res.status(500).send("An error occurred");
+        console.error(error);
+        res.status(500).send("An error occurred");
     }
-  });
+});
 
 
 app.listen(3000)

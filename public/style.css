@@ -5,6 +5,9 @@
   }
   body {
     font-family: "Inter", sans-serif;
+    width:100%;
+    /* display: flex; */
+    flex-direction: row;
   }
   .mb-5 {
     margin-bottom: 20px;
@@ -142,7 +145,7 @@ h1 {
   } */
 
   .card {
-    position: fixed;
+    /* position: fixed; */
     box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px; /* 5px rounded corners */
@@ -190,11 +193,22 @@ h1 {
   /* table Css */
 
   .container {
+    width: 100%;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 10px;
     padding-right: 10px;
+  }
+  .containerCard {
+    width: 100%;
+    /* max-width: 1000px; */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: row;
   }
   
   h2 {
@@ -244,7 +258,7 @@ h1 {
   .responsive-table .col-7 {
     flex-basis:  16.7%;
   }
-  @media all and (max-width: 767px) {
+  @media all and (max-width: 900px) {
     .responsive-table .table-header {
       display: none;
     }
