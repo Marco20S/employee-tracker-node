@@ -98,8 +98,7 @@
 
                                     <br> <br />
 
-                                    <a onclick="showPopup(<%=JSON.stringify(result)%>)" 
-                                        > <button>Edit</button></a>
+                                    <a onclick="showPopup(<%=JSON.stringify(result)%>)"> <button>Edit</button></a>
 
                                 </div>
                             </li>
@@ -120,11 +119,11 @@
                     <form id="updateForm">
 
                         <h3>Update Employee</h3>
-                        <br/>
+                        <br />
 
                         <label>Name & Surname</label>
                         <input type='text' className='mail' name="nameSurname" placeholder="Name & Surname"
-                            id='nameSurname' label='Address'  />
+                            id='nameSurname' label='Address' />
                         <br />
 
                         <label>ID Number</label>
@@ -135,22 +134,22 @@
 
                         <label>Email Address</label>
                         <input type='text' className='mail' name="email" placeholder="Email Address" id='email'
-                            label='Address'  />
+                            label='Address' />
                         <br />
 
                         <label>Employee position</label>
                         <input type='text' className='mail' name="position" placeholder="Employee position"
-                            id='position' label='Address'  />
+                            id='position' label='Address' />
                         <br />
 
                         <label>Phone number</label>
                         <input type='number' className='mail' name="phoneNumber" placeholder="Number" id='phoneNumber'
-                            label='Address'  />
+                            label='Address' />
                         <br />
 
                         <label>Image</label>
-                        <input type='file' className='mail' name="image" placeholder="Example: John Phillips"
-                            id='image' label='Address' />
+                        <input type='file' className='mail' name="image" placeholder="Example: John Phillips" id='image'
+                            label='Address' />
                         <br />
 
                         <div>
@@ -180,8 +179,8 @@
                 }
 
 
-                function showPopup(res){
-                    
+                function showPopup(res) {
+
                     console.log('res', res);
                     document.getElementById('popup-Form').style.display = "block"
 
@@ -190,14 +189,42 @@
                     document.getElementById("email").value = res.email;
                     document.getElementById("position").value = res.position
                     document.getElementById("phoneNumber").value = res.phoneNumber
-                    document.getElementById("image").value = res.image
+                    document.getElementById("image").value = ''
 
+
+                    document.getElementById('updateForm').addEventListener('submit', () => {
+
+                        const nameSurname = document.getElementById("nameSurname").value
+                        const idNumber = document.getElementById("idNumber").value
+                        const email = document.getElementById("email").value
+                        const position = document.getElementById("position").value
+                        const phoneNumber = document.getElementById("phoneNumber").value
+                        const image = document.getElementById("image").value
+
+
+                        const data = { nameSurname, idNumber, email, position, phoneNumber, image }
+
+
+                        const endpoint = `update/${res.id}`
+
+                        fetch(endpoint, {
+                            method: "PUT",
+                            headers: { 'Content-Type': "application/json" },
+                            body: JSON.stringify(data)
+
+                        }).then((response) => 
+                        response.json()).then((data)=>{
+                            console.log("done", data);
+                        }).catch((error)=>{
+                            console.log(error);
+                        })
+                    })
 
                 }
 
-               function hidePopup(){
-                document.getElementById('popup-Form').style.display = "none"
-               }
+                function hidePopup() {
+                    document.getElementById('popup-Form').style.display = "none"
+                }
             </script>
 
 </body>
