@@ -1,93 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css" />
     <title>List</title>
 </head>
+
 <body>
 
     <nav>
-        
+
         <ul>
-    
+
             <li>
                 <a href="/">Home</a>
             </li>
-    
+
             <li>
                 <a href="/employee/add">Add</a>
             </li>
-    
+
             <li>
                 <a href="/employee/list">Employee list</a>
             </li>
-    
+
         </ul>
-    
+
     </nav>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <br />
+    <br />
+    <br />
+    <br />
 
 
     <h1>Employee List</h1>
 
 
 
- 
+    
+    
+ <div class="container">
+    <h2><small>please note that on this page, you can edit and delete employees details</small></h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Empolyee Id</div>
+            <div class="col col-2">Name And Surname</div>
+            <div class="col col-3">Email</div>
+            <div class="col col-4">Employee Address</div>
+            <div class="col col-5">Phone Number</div>
+            <div class="col col-6">Image</div>
+            <div class="col col-7">Operations</div>
+        </li>
 
-        <% if (responseArray.length > 0) {%>
 
 
+        <% if (responseArray.length> 0) { %>
             <% responseArray.map((result)=> { %>
-
-                <div class="container">
-                    <h2><small>please note that on this page, you can edit and delete employees details</small></h2>
-                    <ul class="responsive-table">
-                      <li class="table-header">
-                        <div class="col col-1">Empolyee Id</div>
-                        <div class="col col-2">Name And Surname</div>
-                        <div class="col col-3">Email</div>
-                        <div class="col col-4">Employee Address</div>
-                        <div class="col col-5">Phone Number</div>
-                        <div class="col col-6">Image</div>
-                        <div class="col col-7">Operations</div>
-                      </li>
-                      <li class="table-row">
-                        <div class="col col-1" data-label="Job Id">42235</div>
-                        <div class="col col-2" data-label="Customer Name">John Doe</div>
-                        <div class="col col-3" data-label="Amount">$350</div>
-                        <div class="col col-4" data-label="Payment Status">Pending</div>
-                        <div class="col col-5" data-label="Payment Status">Pending</div>
-                        <div class="col col-6" data-label="Payment Status">Pending</div>
-                        <div class="col col-7" data-label="Payment Status">Pending</div>
-                      </li>
-            
-                      <li class="table-row">
-                        <div class="col col-1" data-label="Job Id">42311</div>
-                        <div class="col col-2" data-label="Customer Name">John Carpenter</div>
-                        <div class="col col-3" data-label="Amount">$115</div>
-                        <div class="col col-4" data-label="Payment Status">Pending</div>
-                        <div class="col col-5" data-label="Payment Status">Pending</div>
-                        <div class="col col-6" data-label="Payment Status">Pending</div>
-                        <div class="col col-7" data-label="Payment Status">
-                            <button>Delete</button>
-                           <br> <br/>
-                            <button>Edit</button></div>
-                      </li>
-                    </ul>
-                  </div>
-                
-
+                <li class="table-row">
+                    <div class="col col-1" data-label="Job Id">
+                        <%= result.title %>
+                    </div>
+                    <div class="col col-2" data-label="Customer Name">
+                        <%= result.nameSurname %>
+                    </div>
+                    <div class="col col-3" data-label="Amount">
+                        <%= result.position %>
+                    </div>
+                    <div class="col col-4" data-label="Payment Status">
+                        <%= result.email %>
+                    </div>
+                    <div class="col col-5" data-label="Payment Status">
+                        <%= result.idNumber %>
+                    </div>
+                    <div class="col col-6" data-label="Payment Status">
+                        <%= result.phoneNumber %>
+                    </div>
+                    <div class="col col-7" data-label="Payment Status">
+                        <button>Delete</button>
+                        <br> <br />
+                        <button>Edit</button>
+                    </div>
+                </li>
                 <% }) %>
-
                     <% } %>
 
 
 
-   
+
+
 </body>
+
 </html>

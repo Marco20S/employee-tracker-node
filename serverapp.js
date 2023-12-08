@@ -65,21 +65,25 @@ app.get('/', async (req, res, next) => {
             responseArray.push({ ...result.data(), id: result.id })
         })
 
-        console.log(responseArray);
+        // console.log(responseArray);
 
-        res.render('index', { title:"List of employees", responseArray }) // Pass responseArray as an object to the render function
+        res.render('index', { title: "List of employees", responseArray }) // Pass responseArray as an object to the render function
     } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred");
     }
 })
 
-// app.get('/list', async (req, res, next) => {
-//     try {
-//         const employeeRef = database.collection('employees')
 
-//         const response = await employeeRef.get()
-//         let responseArray = [] // Declare and initialize the responseArray
+// app.get('employee/list', async (req, res, next) => {
+//     try {
+//         const employeeRefe = database.collection('employees')
+
+//         const response = await employeeRefe.get()
+
+//         // Declare and initialize the responseArray
+//         let responseArray = []
+//         console.log("list response", response);
 
 //         response.forEach((result) => {
 //             responseArray.push({ ...result.data(), id: result.id })
@@ -87,27 +91,32 @@ app.get('/', async (req, res, next) => {
 
 //         console.log(responseArray);
 
-//         res.render('list', { title:"List of employees", responseArray }) // Pass responseArray as an object to the render function
+//         // Pass responseArray as an object to the render function
+//         res.render('list', { title: "List of employees", responseArray })
 //     } catch (error) {
 //         console.error(error);
 //         res.status(500).send("An error occurred");
 //     }
 // })
 
-app.get('/list', async (req, res, next) => {
+app.get('employee/list', async (req, res, next) => {
     try {
-        const employeeRef = database.collection('employees')
+        const employeeRefe = database.collection('employees')
 
-        const response = await employeeRef.get()
-        let responseArray = [] // Declare and initialize the responseArray
+        const response = await employeeRefe.get()
+
+        console.log("list response", response);
+
+        let responseArray = []; // Declare and initialize the responseArray
 
         response.forEach((result) => {
             responseArray.push({ ...result.data(), id: result.id })
+            console.log("result data", result.data());
         })
 
         console.log(responseArray);
 
-        res.render('list', { title:"List of employees", responseArray }) // Pass responseArray as an object to the render function
+        res.render('list', { title: "List of employees", responseArray }) // Pass responseArray as a local variable to the render function
     } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred");
@@ -120,6 +129,7 @@ app.get('employee/add', async (req, res, next) => {
         const employeeRef = database.collection('employees')
 
         const response = await employeeRef.get()
+        console.log("list",response);
         let responseArray = []
 
         response.forEach((result) => {
